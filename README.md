@@ -1,5 +1,9 @@
 # BSOD TestPilot
 
+NOTE!
+
+You are viewing the `havoc` branch, which just directly performs bsod without flags.
+
 This is a BSOD TestPilot Program that allows to trigger Blue Screen of Death (BSOD) on Windows operating system.
 
 This can also be used to test if the program that you are also testing alongside with can cope with this scenaro. Usually, there are tools that can do this. But this one can be run as is, and trigger the BSOD in a safe manner without needing any special tools.
