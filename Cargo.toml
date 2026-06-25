@@ -1,0 +1,22 @@
+# Project Codename: trollbsod
+[package]
+name = "bsod"
+authors = ["Mizumo-prjkt <bluepearl394@gmail.com"]
+version = "0.1.1"
+edition = "2024"
+description = "A tool that triggers BSOD."
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+clap = { version = "4.6.1", features = ["derive"] }
+libloading = "0.9.0"
+panic = "0.4.0"
+platforms = "3.11.0"
+rand = "0.10.1"
+shellexpand = "3.1.2"
+
+[profile.release]
+strip = "debuginfo"
+opt-level = 3
+lto = "thin"
