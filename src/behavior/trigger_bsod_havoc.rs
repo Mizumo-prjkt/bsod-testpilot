@@ -48,6 +48,7 @@ pub fn Trigger_BSOD_Havoc() {
         t2: u32,
     }
     // We randomize bsod code
+    // You can disable this for instant BSOD or just do a timer countdown
     for i in (1..800).rev() {
         thread::sleep(Duration::from_secs(1));
         // Tick tock!!
