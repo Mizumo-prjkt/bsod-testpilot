@@ -147,11 +147,13 @@ name = "bsod"
 version = "0.1.1"
 dependencies = [
  "clap",
+ "env",
  "libloading",
  "panic",
  "platforms",
  "rand",
  "shellexpand",
+ "windows-sys",
 ]
 
 [[package]]
@@ -261,6 +263,15 @@ checksum = "1e0e367e4e7da84520dedcac1901e4da967309406d1e51017ae1abfb97adbd38"
 dependencies = [
  "bitflags",
  "objc2",
+]
+
+[[package]]
+name = "env"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bc95de49ad098572c02d3fbf368c9a020bfff5ae78483685b77f51d8a7e9486d"
+dependencies = [
+ "num_threads",
 ]
 
 [[package]]
@@ -390,6 +401,15 @@ dependencies = [
  "bitflags",
  "cfg-if",
  "cfg_aliases",
+ "libc",
+]
+
+[[package]]
+name = "num_threads"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c7398b9c8b70908f6371f47ed36737907c87c52af34c268fed0bf0ceb92ead9"
+dependencies = [
  "libc",
 ]
 
