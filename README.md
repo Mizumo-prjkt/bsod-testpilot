@@ -9,7 +9,7 @@ For advanced users who also wants to play hot potato, you can also try tweak the
 
 # Disclaimer
 
-This application is intended for educational purposes only. It is a tool strictly for public awareness, not for causing harm. The developer is not responsible for any damages caused by the use of this application. The developer is not responsible for any damages caused by the use of this application.
+This application is intended for educational purposes only. It is a tool strictly for public awareness, not for causing harm. The developer is not responsible for any damages caused by the use of this application, in every way using this software, or its forked derivatives and the source precursor.
 
 This software was used for personal learning of Rust, and pull of a idiotic joke regarding Rust, that rust, can in fact do BSOD if you let it.
 
