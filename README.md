@@ -22,7 +22,7 @@ Still, i have a lot to learn.
 
 # Credits
 
-Special credit to Barrett Adams (peewpw) for the exploit.<br>You can check (https://github.com/peewpw/Invoke-BSOD)[https://github.com/peewpw/Invoke-BSOD] for more info.
+Special credit to Barrett Adams (peewpw) for the exploit.<br>You can check https://github.com/peewpw/Invoke-BSOD for more info.
 
 This developer is 10000000000x better than me.
 
