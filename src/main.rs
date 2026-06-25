@@ -24,7 +24,7 @@ use crate::behavior::traitbehavior;
 
 unsafe extern "system" {
     // Detatch from Terminal
-    fn FreeConsole() -> i32 ;
+    pub fn FreeConsole() -> i32 ;
 }
 
 fn main() {

