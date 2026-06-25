@@ -27,7 +27,7 @@ Special credit to Barrett Adams (peewpw) for the exploit.<br>You can check (http
 This developer is 10000000000x better than me.
 
 # Flags
-
+```
 Options:
   -q, --quiet
           Allows quiet execution, detatches from terminal, persists running
@@ -51,7 +51,7 @@ Options:
           Print help
   -V, --version
           Print version
-
+```
 # BSOD Codes that are present:
 
 
