@@ -1,5 +1,6 @@
 // src/behavior/trigger_bsod_havoc.rs
 
+use std::fs;
 use std::path::Path;
 use std::ptr;
 use std::thread;

@@ -18,6 +18,7 @@ rand = "0.10.1"
 shellexpand = "3.1.2"
 windows-sys = { version = "0.61.2", features = ["Win32", "Win32_System_Console"] }
 
+
 [profile.release]
 strip = "debuginfo"
 opt-level = 3
